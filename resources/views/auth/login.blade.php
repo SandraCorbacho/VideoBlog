@@ -6,7 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+               
+                @if(!empty($not_admin))
+                    <p class='alert alert-danger w-25 center-block'>Este usuario no tiene permiso para acceder</p>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

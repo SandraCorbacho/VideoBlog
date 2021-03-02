@@ -19,21 +19,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::put('post/{id}', function ($id) {
-    //
-})->middleware('auth', 'role:admin');
+Route::prefix('admin')->middleware('role')->group(function () {
 
-/*Route::resource([
-    'properties'=>'PropertyController',
-    'publications'=>'PublicationController'
-        ]);*/
+    Route::get('/home', function () {
+        return view('admin.profile');
+    })->name('profile');
 
+    Route::get('/create', function () {
+        return "create de administracion";
+    });
 
-Route::get('/profile',function(){
-    return view('admin.profile');
-})->name('profile');
-Route::get('/create/video',function(){
-    return view('admin.form.create');
+    Route::get('/edit/{id}', function () {
+        return "editar video con id";
+    });
+
+    Route::get('/delete/{id}', function () {
+        return "borrar video con id";
+    });
 });
+
 
 

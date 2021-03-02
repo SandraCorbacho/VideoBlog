@@ -48,9 +48,7 @@ class User extends Authenticatable
     }
     public function roles()
     {
-        return $this
-            ->belongsToMany('App\Models\Role')
-            ->withTimestamps();
+        return $this->belongsToMany(Role::class);
     }
     public function authorizeRoles($roles)
 {
@@ -58,6 +56,10 @@ class User extends Authenticatable
         return true;
     }
     abort(401, 'Non authorized action.');
+}
+public function getCompletedAttribute($value)
+{
+    return $this->getMedia()->isEmpty() && $value;
 }
 public function hasAnyRole($roles)
 {
@@ -76,7 +78,8 @@ public function hasAnyRole($roles)
     }
     public function hasRole($role)
     {
-        if ($this->roles()->where('name', $role)->first()) {
+      
+        if ($this->roles()->where('name', 'admin')->first()) {
             return true;
         }
         return false;

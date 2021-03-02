@@ -2,8 +2,6 @@
 
 namespace App\Http\Middleware;
 
-unamespace App\Http\Middleware;
-
 use Closure;
 
 class CheckRole
@@ -16,11 +14,13 @@ class CheckRole
      * @param $role
      * @return mixed
      */
-    public function handle($request, Closure $next,$role)
+    public function handle($request, Closure $next)
     {
-        if (! $request->user()->hasRole($role)) {
-            return redirect('home');
+        if (!empty($request->user()) && $request->user()->hasRole('admin')) {
+            return $next($request);
         }
-        return $next($request);
+        return redirect('login')
+        ->with('not_admin', 'El usuario no tiene permisos');
+        //return redirect('login')->with('errors', 'ususario no tiene permisos');
     }
 }
