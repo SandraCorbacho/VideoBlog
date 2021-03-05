@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StaticController;
+use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\ChannelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,13 +23,10 @@ Auth::routes();
 
 Route::prefix('admin')->middleware('role')->group(function () {
 
-    Route::get('/home', function () {
-        return view('admin.profile');
-    })->name('profile');
-
-    Route::get('/create', function () {
-        return "create de administracion";
-    });
+    Route::get('/home',[StaticController::class, 'profile'])->name('profile');
+    Route::get('/create/{item}',[StaticController::class, 'create'])->name('create');
+    Route::post('/create/{item}',[VideoController::class, 'create']);
+    Route::post('/create/{item}',[ChannelController::class, 'create']);
 
     Route::get('/edit/{id}', function () {
         return "editar video con id";

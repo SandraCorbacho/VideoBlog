@@ -17,10 +17,10 @@
 
       <h1 class="my-4">Canal Nombre Canal</h1>
       <div class="list-group">
-        <a href="/create/video" class="list-group-item">Nuevo Video</a>
+        <a href="{{route('create','Video')}}" class="list-group-item">Nuevo Video</a>
         <a href="" class="list-group-item">Tus Videos</a>
         <a href="#" class="list-group-item">Tus Subscipciones</a>
-        <a href="#" class="list-group-item">Tu canal</a>
+        <a href="{{route('create', 'Channel')}}" class="list-group-item">Tu canal</a>
  
       </div>
 
