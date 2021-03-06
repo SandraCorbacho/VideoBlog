@@ -16,11 +16,13 @@ class Video extends Migration
         Schema::create('videos', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->integer('channel_id')->unsigned();
             $table->string('image')->nullable();
             $table->string('path');
             $table->string('title');
             $table->longText('description');
             $table->boolean('active')->default(1);
+            $table->foreign('channel_id')->references('id')->on('channels');
             $table->timestamps();
         });
     }

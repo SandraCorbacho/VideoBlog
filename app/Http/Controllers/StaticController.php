@@ -10,8 +10,9 @@ class StaticController extends Controller
        
         return view('admin.form.create')->with('item', $item);    
     }
-    public function profile(){
-        dd('ee');
-        return view('admin.profile');
+    
+    public function detail($item){
+        return view('admin.detail')->with('item', $item);    
     }
+  
 }

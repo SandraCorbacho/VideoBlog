@@ -1,14 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-<!--<h1>Este es tu perfil</h1>
-<h3>Aqui podrás:</h3>
-<p>subir Video</p>
-<p>Editar video</p>
-<p>Borrar video</p>
-<p>ver Estadisticas de tu canal</p>
-<p>Ver y gestionar subscripciones</p>-->
-
 <div class="container">
 
   <div class="row">
@@ -22,9 +14,8 @@
         <a href="{{route('create','Video')}}" class="list-group-item">Nuevo Video</a>
         <a href="" class="list-group-item">Tus Videos</a>
         <a href="#" class="list-group-item">Tus Subscipciones</a>
-        @if(empty($channel))<a href="{{route('create', 'Channel')}}" class="list-group-item">Crear canal</a>@else
-        <a href="{{route('detail', 'Channel')}}" class="list-group-item">Tu canal</a> @endif
- 
+        @if($item == 'Channel')<a href="{{route('edit', 'Channel')}}" class="list-group-item">Editar canal</a>@endif
+
       </div>
 
     </div>

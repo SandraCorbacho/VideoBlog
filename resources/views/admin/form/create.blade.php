@@ -19,7 +19,7 @@
       <p>Ver y gestionar subscripciones</p>
 
     </div>
-   <form method="POST" action="{{route('create', $item)}}">
+   <form method="POST" action="{{route('create'.$item, $item)}}" enctype="multipart/form-data">
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -35,16 +35,23 @@
       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nombre del {{$item}}</label>
-        <input type="text" class="form-control" placeholder="Nombre de tu canal" name='name' @if(old("name")!==null) value="{{ old('name') }}" @endif >
+        <input type="text" class="form-control" placeholder="Nombre para tu {{$item}}" name='title' @if(old("title")!==null) value="{{ old('title') }}" @endif >
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Descripción del {{$item}}</label>
         <textarea class="form-control" name='description' rows="3"></textarea>
       </div>
       <div class="input-group mb-3">
-        <input type="file" class="form-control" id="inputGroupFile02" name='image' >
+        <input type="file"  @if($item == 'Video') accept="video/mp4" name="video" @else name="image" @endif>
         <label class="input-group-text"  for="inputGroupFile02">Imagen para tu {{$item}}</label>
       </div>
+      @if($item == 'Video')
+      <div class="input-group-text">
+        <label class="input-group-text"  for="inputGroupFile02">Video activo</label>
+        Sí <input type="radio" aria-label="Si" name='active' value='true'>
+        No <input type="radio" aria-label="No" name='active' value='false'>
+      </div>
+      @endif
       <input type="submit" value=" crear {{$item}}">
     
     </div>

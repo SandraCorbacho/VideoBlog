@@ -11,11 +11,18 @@ class CrudController
         $data = $request->all();
         //dd($data['type']);
         $table = $data['type'];
-        $this->storage($data['image'], $table);
         
-        $repo->save()
+        $this->storage($data['image']);
+        
+        $repo->save();
+       
     }
-    public function storage($image, $table){
-        \Storage::disk('public2')->put( $table.'/', $image);
+    public function store(Request $request, $path, $type)
+    {
+       
+        $path=$request->file($type)->store($path,'public');
+        dd($path);
+        return $path;
+               
     }
 }
